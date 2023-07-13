@@ -32,7 +32,7 @@ echo 'export PATH="${PATH}:${GOPATH}/bin"' > $HOME/.profile
 <<<<<<< HEAD
 echo 'export GTK_IM_MODULE=fcitx' >> $HOME/.xprofile
 echo 'export QT_IM_MODULE=fcitx' >> $HOME/.xprofile
-echo 'export XMODIFIERS=@im=fcitx' >aho> $HOME/.xprofile
+echo 'export XMODIFIERS=@im=fcitx' >> $HOME/.xprofile
 =======
 echo 'export GTK_IM_MODULE=fcitx' >> $HOME/.xprofile
 echo 'export QT_IM_MODULE=fcitx' >> $HOME/.xprofile
@@ -49,5 +49,5 @@ cat config | cat >> $XDG_CONFIG_HOME/sway/config
 # lightdmの設定
 sudo systemctl enable lightdm
 sudo systemctl enable graphical.target
-sudo mv sway.desktop  /usr/share/wayland-session/
+sudo mv sway.desktop  /usr/share/wayland-sessions/
 sudo mv swayon /usr/local/bin/

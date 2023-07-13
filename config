@@ -1,5 +1,5 @@
 # mod+b
-# s/rofi/wofi/
+# s/dmenu/wofi -d/
 # font pango:PlemolJP Console NF 10
 # set $term wezterm
 # ネイティブな Wayland サポート

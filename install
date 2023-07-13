@@ -29,9 +29,15 @@ echo 'export XDG_DATA_HOME="${HOME}/.local/share"' >> $HOME/.profile
 echo 'export XDG_STATE_HOME="${HOME}/.local/state"' >> $HOME/.profile
 echo 'export GOPATH="${XDG_DATA_HOME}/go"' >> $HOME/.profile
 echo 'export PATH="${PATH}:${GOPATH}/bin"' > $HOME/.profile
+<<<<<<< HEAD
+echo 'export GTK_IM_MODULE=fcitx' >> $HOME/.xprofile
+echo 'export QT_IM_MODULE=fcitx' >> $HOME/.xprofile
+echo 'export XMODIFIERS=@im=fcitx' >aho> $HOME/.xprofile
+=======
 echo 'export GTK_IM_MODULE=fcitx' >> $HOME/.xprofile
 echo 'export QT_IM_MODULE=fcitx' >> $HOME/.xprofile
 echo 'export XMODIFIERS=@im=fcitx' >> $HOME/.xprofile
+>>>>>>> fd9f95f58b7ef45915d82480d7d75ef3bcdeddb6
 source $HOME/.profile
 source $HOME/.xprofile
 

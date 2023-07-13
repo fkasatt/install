@@ -1,25 +1,13 @@
 #!/bin/bash
 
+sudo systemctl enable NetworkManager
+sudo systemctl start NetworkManager
+nmtui
+
 # 必要なパッケージのインストール
-sudo pacman -Syu
 sudo vi /etc/pacman.conf
-sudo pacman -S jq vivaldi wezterm xorg-xwayland qt5-wayland wget man-db man-pages neofetch screenfetch rsync httpie \
-	go fzf wl-clipboard typst zathura zathura-pdf-mupdf go base-devel discord krita unzip mako grim slurp \
-	noto-fonts-cjk noto-fonts-emoji noto-fonts-extra ttf-dejavu otf-ipafont otf-ipamjfont \
-	ufw thunar gvfs gvfs-smb sshfs tumbler wofi ranger tlp \
-	lightdm lightdm-webkit2-greeter lightdm-webkit-theme-litarvan bluez bluez-utils blueman network-manager-applet ufw \
-	fcitx5 fcitx5-skk fcitx5-im fcitx5-configtool skk-jisyo 
-
-# Rustのインストール
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-cargo install lsd fd-find dusk ripgrep bat cargo-update
-source $HOME/.cargo/env
-
-# paruの導入
-git clone https://aur.archlinux.org/paru.git
-cd paru
-makepkg -si
-rm -rf paru
+sudo pacman -Syu
+sudo pacman -S jq wget vivaldi wezterm xorg-xwayland qt5-wayland unzip lightdm lightdm-webkit2-greeter lightdm-webkit-theme-litarvan 
 
 # PlemolJPなど日本語フォントを規定のフォントにする
 wget https://github.com/yuru7/PlemolJP/releases/download/v1.6.0/PlemolJP_NF_v1.6.0.zip
@@ -46,44 +34,10 @@ echo 'export XMODIFIERS=@im=fcitx' > $HOME/.xprofile
 source $HOME/.profile
 source $HOME/.xprofile
 
-# skkの設定
-mkdir -p $XDG_CONFIG_HOME/fcitx
-mkdir -p $XDG_CONFIG_HOME/fcitx/skk
-touch $XDG_CONFIG_HOME/fcitx/skk/user.dict
-mv dictionary_list $XDG_CONFIG_HOME/fcitx/skk/
-
-# gitの設定
-git config --global init.defaultBranch main
-git config --global user.name "name"
-git config --global user.email "mail"
-
-# ファイアウォールの設定
-sudo systemctl start ufw.service
-sudo systemctl enable ufw.service
-sudo ufw enable
-sudo ufw default deny
-
-# 時刻の同期設定
-sudo vi /etc/systemd/timesyncd.conf
-sudo timedatectl set-ntp true
-
-# クリップボード
-go install github.com/yory8/clipman@lastest
-sudo ln -s $GOPATH/bin/clipman /usr/bin/clipman
-mv myclipman $HOME/scripts/
-
-# その他
-sudo systemctl enable bluetooth
-sudo systemctl start bluetooth
-
-sudo systemctl enable tlp
-
-sudo useradd -G video owner
-
 # swayの設定
-cp /etc/sway/config $HOME/.config/sway/config
-cp -r /etc/xdg/waybar $HOME/.config/
-cat config | cat >> $HOME/.config/sway/config
+cp /etc/sway/config $XDG_CONFIG_HOME/sway/config
+cp -r /etc/xdg/waybar $XDG_CONFIG_HOME/
+cat config | cat >> $XDG_CONFIG_HOME/sway/config
 
 # lightdmの設定
 sudo systemctl enable lightdm

@@ -1,0 +1,22 @@
+# mod+b
+# s/rofi/wofi/
+
+input * {
+	xkb_options "ctrl:swapcaps"
+}
+
+input type:touchpad {
+    tap enabled
+    dwt enabled
+    natural_scroll enabled
+    pointer_accel 1
+}
+
+exec fcitx5 -d
+exec nm-applet --indicator
+
+exec wl-paste -t text --watch ~/scripts/myclipman
+bindsym $mod+b exec clipman pick -t wofi
+
+bindsym $mod+F6 exec light -A 10
+bindsym $mod+F7 exec light -U 10

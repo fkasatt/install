@@ -1,8 +1,21 @@
 # mod+b
 # s/rofi/wofi/
+# font pango:PlemolJP Console NF 10
+# set $term wezterm
+# ネイティブな Wayland サポート
+# chrome://flags のページを開き、wayland と検索してください。Preferred Ozone platform という設定があります。この設定を auto に設定してください。デフォルトは "X11" です。"Auto" は、可能であれば Wayland を選択し、無理ならば X11 を選択します。
+# $mod+0
+
+set $browser vivaldi-stable
+set $DL Downloads
 
 input * {
 	xkb_options "ctrl:swapcaps"
+}
+
+input type:keyboard {
+    repeat_delay 300
+    repeat_rate 50
 }
 
 input type:touchpad {
@@ -13,10 +26,23 @@ input type:touchpad {
 }
 
 exec fcitx5 -d
+exec mako
 exec nm-applet --indicator
-
+exec blueman-applet
+for_window [app_id="blueman-manager"] floating enable
 exec wl-paste -t text --watch ~/scripts/myclipman
-bindsym $mod+b exec clipman pick -t wofi
 
+bindsym $mod+b exec clipman pick -t wofi
+bindsym $mod+F2 exec $browser
 bindsym $mod+F6 exec light -A 10
 bindsym $mod+F7 exec light -U 10
+
+bindsym Print exec /usr/share/sway/scripts/grimshot --notify save output  $HOME/$DL/screenshot_$(date "+%y%m%d%H%M%S").png
+bindsym $mod+Print exec /usr/share/sway/scripts/grimshot --notify save window $HOME/$DL/screenshot_$(date "+%y%m%d%H%M%S").png
+bindsym $mod+Shift+s exec /usr/share/sway/scripts/grimshot --notify save area  $HOME/$DL/screenshot_$(date "+%y%m%d%H%M%S").png
+
+exec swayidle -w  \
+	timeout 300 'swaylock -f -C 000000' \
+	timeout 1200 'systemctl suspend'
+
+bindsym $mod+0 exec swaylock -f -C 000000

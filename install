@@ -7,7 +7,7 @@ sudo pacman -S jq vivaldi wezterm xorg-xwayland qt5-wayland wget man-db man-page
 	go fzf wl-clipboard typst zathura zathura-pdf-mupdf go base-devel discord krita unzip mako grim slurp \
 	noto-fonts-cjk noto-fonts-emoji noto-fonts-extra ttf-dejavu otf-ipafont otf-ipamjfont \
 	ufw thunar gvfs gvfs-smb sshfs tumbler wofi ranger tlp \
-	lightdm bluez bluez-utils blueman network-manager-applet ufw \
+	lightdm lightdm-webkit2-greeter lightdm-webkit-theme-litarvan bluez bluez-utils blueman network-manager-applet ufw \
 	fcitx5 fcitx5-skk fcitx5-im fcitx5-configtool skk-jisyo 
 
 # Rustのインストール
@@ -46,6 +46,12 @@ echo 'export XMODIFIERS=@im=fcitx' > $HOME/.xprofile
 source $HOME/.profile
 source $HOME/.xprofile
 
+# skkの設定
+mkdir -p $XDG_CONFIG_HOME/fcitx
+mkdir -p $XDG_CONFIG_HOME/fcitx/skk
+touch $XDG_CONFIG_HOME/fcitx/skk/user.dict
+mv dictionary_list $XDG_CONFIG_HOME/fcitx/skk/
+
 # gitの設定
 git config --global init.defaultBranch main
 git config --global user.name "name"
@@ -64,12 +70,9 @@ sudo timedatectl set-ntp true
 # クリップボード
 go install github.com/yory8/clipman@lastest
 sudo ln -s $GOPATH/bin/clipman /usr/bin/clipman
-cp myclipman $HOME/scripts/
+mv myclipman $HOME/scripts/
 
 # その他
-sudo systemctl enable graphical.target
-sudo systemctl enable lightdm
-
 sudo systemctl enable bluetooth
 sudo systemctl start bluetooth
 
@@ -80,7 +83,10 @@ sudo useradd -G video owner
 # swayの設定
 cp /etc/sway/config $HOME/.config/sway/config
 cp -r /etc/xdg/waybar $HOME/.config/
-config="${HOME}/.config/sway/config"
-cat $config | sed 's/^font /font pango:PlemolJP Console NF 10/' | cat > tmp
-cat tmp | sed 's/^set $term .*/set $term wezterm/' | cat > $config
-cat config | cat >> $config
+cat config | cat >> $HOME/.config/sway/config
+
+# lightdmの設定
+sudo systemctl enable lightdm
+sudo systemctl enable graphical.target
+sudo mv sway.desktop  /usr/share/wayland-session/
+sudo mv swayon /usr/local/bin/

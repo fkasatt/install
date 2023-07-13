@@ -45,3 +45,4 @@ sudo systemctl enable lightdm
 sudo systemctl enable graphical.target
 sudo mv sway.desktop  /usr/share/wayland-sessions/
 sudo mv swayon /usr/local/bin/
+sudo vi /etc/lightdm/lightdm.conf

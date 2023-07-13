@@ -19,6 +19,7 @@ fc-cache -vf
 
 # 環境変数の設定
 mkdir -p $HOME/.config
+mkfit -p $HOME/.config/sway
 mkdir -p $HOME/.cache
 mkdir -p $HOME/.local/share/go
 mkdir $HOME/scripts

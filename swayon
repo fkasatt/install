@@ -10,4 +10,6 @@ export QT_SCALE_FACTOR=1
 export MOZ_ENABLE_WAYLAND=1
 export WINIT_UNIX_BACKEND=x11
 
+sleep 5
+
 exec sway

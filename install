@@ -23,15 +23,15 @@ mkfit -p $HOME/.config/sway
 mkdir -p $HOME/.cache
 mkdir -p $HOME/.local/share/go
 mkdir $HOME/scripts
-echo 'export XDG_CONFIG_HOME="${HOME}/.config"' > $HOME/.profile
-echo 'export XDG_CACHE_HOME="${HOME}/.cache"' > $HOME/.profile
-echo 'export XDG_DATA_HOME="${HOME}/.local/share"' > $HOME/.profile
-echo 'export XDG_STATE_HOME="${HOME}/.local/state"' > $HOME/.profile
-echo 'export GOPATH="${XDG_DATA_HOME}/go"' > $HOME/.profile
+echo 'export XDG_CONFIG_HOME="${HOME}/.config"' >> $HOME/.profile
+echo 'export XDG_CACHE_HOME="${HOME}/.cache"' >> $HOME/.profile
+echo 'export XDG_DATA_HOME="${HOME}/.local/share"' >> $HOME/.profile
+echo 'export XDG_STATE_HOME="${HOME}/.local/state"' >> $HOME/.profile
+echo 'export GOPATH="${XDG_DATA_HOME}/go"' >> $HOME/.profile
 echo 'export PATH="${PATH}:${GOPATH}/bin"' > $HOME/.profile
-echo 'export GTK_IM_MODULE=fcitx' > $HOME/.xprofile
-echo 'export QT_IM_MODULE=fcitx' > $HOME/.xprofile
-echo 'export XMODIFIERS=@im=fcitx' > $HOME/.xprofile
+echo 'export GTK_IM_MODULE=fcitx' >> $HOME/.xprofile
+echo 'export QT_IM_MODULE=fcitx' >> $HOME/.xprofile
+echo 'export XMODIFIERS=@im=fcitx' >> $HOME/.xprofile
 source $HOME/.profile
 source $HOME/.xprofile
 
